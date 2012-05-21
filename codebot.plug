@@ -4,3 +4,4 @@ Module = codeBot
 
 [Documentation]
 Description = Allow to "execute code" in the bot
+

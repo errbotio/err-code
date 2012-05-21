@@ -8,6 +8,10 @@ For more information about err you can find it here: https://github.com/gbin/err
 
 **Installation**
 
+Dependencies
+::
+    pip install requests
+
 If you have the admin rights on an err chatbot simply use
 ::
     !install git@github.com:gbin/err-codebot.git
