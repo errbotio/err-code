@@ -2,10 +2,10 @@ __author__ = 'gbin'
 
 from botplugin import BotPlugin
 from jabberbot import botcmd
-from less_serious_plugins.codepad import CodePad
+from codepad import CodePad
 
 class CodeBot(BotPlugin):
-    
+
     @botcmd
     def python(self, mess, args):
         """ Execute the python expression """
