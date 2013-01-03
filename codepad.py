@@ -1,6 +1,6 @@
-__author__ = 'gbin'
 import requests
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
+
 
 class CodePad(object):
     def __init__(self, code=None, lang="Python", private=True, run=True):
