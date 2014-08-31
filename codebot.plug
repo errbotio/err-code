@@ -2,6 +2,9 @@
 Name = CodeBot
 Module = codeBot
 
+[Python]
+Version = 2+
+
 [Documentation]
 Description = Allow to "execute code" in the bot
 
