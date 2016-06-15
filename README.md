@@ -15,4 +15,11 @@ If you have the admin rights on an Errbot simply use this in a one-to-one chat:
 
 Then `!help` to see the available commands and their explanation.
 
+### example
 
+Execute a Python snippet.
+
+```
+>>> !python print(range(10))
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
