@@ -1,5 +1,3 @@
-import re
-
 from errbot import BotPlugin, botcmd
 import requests
 from bs4 import BeautifulSoup
