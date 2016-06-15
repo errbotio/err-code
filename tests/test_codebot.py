@@ -1,4 +1,3 @@
-# coding=utf-8
 from errbot.backends.test import FullStackTest
 
 class TestCommands(FullStackTest):

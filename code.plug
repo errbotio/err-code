@@ -1,9 +1,6 @@
 [Core]
-Name = CodeBot
-Module = codeBot
-
-[Python]
-Version = 2+
+Name = Code
+Module = code
 
 [Documentation]
 Description = Allow to "execute code" in the bot
