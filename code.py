@@ -5,61 +5,60 @@ import requests
 from bs4 import BeautifulSoup
 
 
+def scrape_codepad(code, lang='Python', private=True, run=True):
+    data = {'code': code,
+            'lang': lang,
+            'private': str(private),
+            'run': str(run),
+            'submit': 'Submit'}
+    r = requests.post('http://codepad.org/', data=data)
+    if not r.ok:
+        return "Failed to contact codepad: %s" % r.content
+
+    soup = BeautifulSoup(r.content, 'lxml')
+    output = soup.find('a', attrs={'name': 'output'})
+    if not output:
+        return "Failed to parse the result page."
+
+    result = output.findNext('div').table.tr.td.findNext('td').div.pre.text
+    return '```\n%s\n```' % result.strip('\n ')
+
+
 class CodeBot(BotPlugin):
-
-    def scrape_codepad(self, code=None, lang='Python', private=True, run=True):
-        data = {'code': code,
-                'lang': lang,
-                'private': str(private),
-                'run': str(run),
-                'submit': 'Submit'}
-        r = requests.post('http://codepad.org/', data=data)
-        if not r.ok:
-            return "Failed to contact codepad: %s" % r.content
-
-        results = []
-        soup = BeautifulSoup(r.content, 'lxml')
-        all_as = soup.findAll('a', attrs={'name': re.compile(r'^output-line-\d+$')})
-        for a in all_as:
-            res = a.parent.parent.parent.nextSibling.nextSibling.div.pre.string
-            if not res:
-                results = ['Error, check the error here : %s' % r.url]
-                break
-            results.append(res)
-
-        return ''.join(results).strip('\n ').replace('&quot;', '"')
 
     @botcmd
     def python(self, _, args):
-        """ Execute the python expression """
-        return self.scrape_codepad(args)
+        """ Execute the python expression.
+            ie. !python print(range(10))
+        """
+        return scrape_codepad(args)
 
     @botcmd
     def c(self, _, args):
         """ Execute the c expression """
-        return self.scrape_codepad(args, lang='C')
+        return scrape_codepad(args, lang='C')
 
     @botcmd
     def cpp(self, _, args):
-        """ Execute the c expression """
-        return self.scrape_codepad(args, lang='C++')
+        """ Execute the cpp expression """
+        return scrape_codepad(args, lang='C++')
 
     @botcmd
     def php(self, _, args):
         """ Execute the PHP expression """
-        return self.scrape_codepad(args, lang='PHP')
+        return scrape_codepad(args, lang='PHP')
 
     @botcmd
     def perl(self, _, args):
         """ Execute the Perl expression """
-        return self.scrape_codepad(args, lang='Perl')
+        return scrape_codepad(args, lang='Perl')
 
     @botcmd
     def tcl(self, _, args):
         """ Execute the TCL expression """
-        return self.scrape_codepad(args, lang='Tcl')
+        return scrape_codepad(args, lang='Tcl')
 
     @botcmd
     def lua(self, _, args):
         """ Execute the LUA expression """
-        return self.scrape_codepad(args, lang='Lua')
+        return scrape_codepad(args, lang='Lua')
